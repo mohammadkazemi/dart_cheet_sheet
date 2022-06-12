@@ -697,7 +697,7 @@ enableFlags({{c1:bold: true}});
 
 The next example shows how to set default values for positional parameters:
 
-String say(String from, String msg, [String device = 'carrier pigeon']) {
+String say(String from, String msg, {{c1:[}}String device {{c1:=}} 'carrier pigeon'{{c1:]}}) {
   var result = '$from says $msg with a $device';
   return result;
 }
@@ -706,12 +706,15 @@ assert(say('Bob', 'Howdy') == 'Bob says Howdy with a carrier pigeon');
 You can also pass lists or maps as default values. The following example defines a function, doStuff(), that specifies a default list for the list parameter and a default map for the gifts parameter.
 
 void doStuff(
-    {List<int> list = const [1, 2, 3],
-    Map<String, String> gifts = const {
+    {{c1:{}}
+      {{c1:List<int>}} list = {{c1:const}} [1, 2, 3],
+      {{c1:Map<String, String>}} gifts = {{c1:const}} {{c1:{}}
       'first': 'paper',
       'second': 'cotton',
       'third': 'leather'
-    }}) {
+    {{c1:}}}
+    {{c1:}}}
+    ) {
   print('list:  $list');
   print('gifts: $gifts');
 }
@@ -719,29 +722,29 @@ void doStuff(
 
 ##  The main() function
 ```dart
-Every app must have a top-level main() function, which serves as the entrypoint to the app. The main() function returns void and has an optional List<String> parameter for arguments.
+Every app must have a {{c1:top-level}} main() function, which serves as the {{c1:entrypoint}} to the app. The main() function returns {{c1:void}} and has an optional {{c1:List<String>}} parameter for arguments.
 
 Here’s a simple main() function:
 
-void main() {
+{{c1:void}} main() {
   print('Hello, World!');
 }
 Here’s an example of the main() function for a command-line app that takes arguments:
 
 // Run the app like this: dart args.dart 1 test
-void main(List<String> arguments) {
+{{c1:void}} main({{c1:List<String>}} arguments) {
   print(arguments);
 
   assert(arguments.length == 2);
   assert(int.parse(arguments[0]) == 1);
   assert(arguments[1] == 'test');
 }
-You can use the args library to define and parse command-line arguments.
+You can use the {{c1:args}} library to define and parse command-line arguments.
 ```
 
 ##  Functions as first-class objects
 ```dart
-You can pass a function as a parameter to another function. For example:
+You can pass a function as a {{c1:parameter}} to another function. For example:
 
 void printElement(int element) {
   print(element);
@@ -749,20 +752,22 @@ void printElement(int element) {
 
 var list = [1, 2, 3];
 
-// Pass printElement as a parameter.
-list.forEach(printElement);
-You can also assign a function to a variable, such as:
+// Pass printElement as a parameter and print each element of list
+list.{{c1:forEach}}({{c1:printElement}});
+You can also assign a function to a {{c1:variable}}, such as:
+// save function into variable loudify
+{{c1:var}} {{c1:loudify}} = (msg) => '!!! ${msg.toUpperCase()} !!!';
 
-var loudify = (msg) => '!!! ${msg.toUpperCase()} !!!';
-assert(loudify('hello') == '!!! HELLO !!!');
-This example uses an anonymous function. More about those in the next section.
+// use variable to call function, pass parameter 'hello' to variable
+assert({{c1:loudify}}{{c1:(}}'hello'{{c1:)}} == '!!! HELLO !!!');
+This example uses an {{c1:anonymous}} function. More about those in the next section.
 ```
 
 ##  Anonymous functions
 ```dart
-Most functions are named, such as main() or printElement(). You can also create a nameless function called an anonymous function, or sometimes a lambda or closure. You might assign an anonymous function to a variable so that, for example, you can add or remove it from a collection.
+Most functions are named, such as main() or printElement(). You can also create a nameless function called an {{c1:anonymous}} function, or sometimes a {{c1:lambda}} or {{c1:closure}}. You might assign an anonymous function to a {{c1:variable}} so that, for example, you can {{c1:add}} or {{c1:remove}} it from a collection.
 
-An anonymous function looks similar to a named function—zero or more parameters, separated by commas and optional type annotations, between parentheses.
+An anonymous function looks similar to a named function—{{c1:zero}} or {{c1:more}} parameters, separated by {{c1:commas}} and {{c1:optional}} type annotations, between {{c1:parentheses}}.
 
 The code block that follows contains the function’s body:
 
@@ -770,21 +775,21 @@ The code block that follows contains the function’s body:
   codeBlock;
 };
 
-The following example defines an anonymous function with an untyped parameter, item. The function, invoked for each item in the list, prints a string that includes the value at the specified index.
+The following example defines an anonymous function with an {{c1:untyped}} parameter, item. The function, invoked for each item in the list, prints a string that includes the value at the specified index.
 
 const list = ['apples', 'bananas', 'oranges'];
-list.forEach((item) {
-  print('${list.indexOf(item)}: $item');
+list.forEach(({{c1:item}}) {
+  print('${list.indexOf({{c1:item}})}: ${{c1:item}}');
 });
 
-If the function contains only a single expression or return statement, you can shorten it using arrow notation. Paste the following line into DartPad and click Run to verify that it is functionally equivalent.
+If the function contains only a {{c1:single}} expression or {{c1:return}} statement, you can shorten it using {{c1:arrow}} notation. Paste the following line into DartPad and click Run to verify that it is functionally equivalent.
 
-list.forEach((item) => print('${list.indexOf(item)}: $item'));
+list.forEach(({{c1:item}}) => print('${list.indexOf({{c1:item}})}: ${{c1:item}}'));
 ```
 
 ##  Lexical scope
 ```dart
-Dart is a lexically scoped language, which means that the scope of variables is determined statically, simply by the layout of the code. You can “follow the curly braces outwards” to see if a variable is in scope.
+Dart is a {{c1:lexically}} scoped language, which means that the scope of variables is determined {{c1:statically}}, simply by the layout of the code. You can “follow the {{c1:curly braces}} outwards” to see if a variable is in scope.
 
 Here is an example of nested functions with variables at each scope level:
 
@@ -806,26 +811,28 @@ void main() {
     }
   }
 }
-Notice how nestedFunction() can use variables from every level, all the way up to the top level.
+Notice how nestedFunction() {{c1:can}} use variables from every level, all the way up to the top level.
 ```
 
 ##  Lexical closures
 ```dart
-A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.
+A closure is a {{c1:function}} object that has access to {{c1:variables}} in its lexical scope, even when the function is used {{c1:outside}} of its original scope.
 
 Functions can close over variables defined in surrounding scopes. In the following example, makeAdder() captures the variable addBy. Wherever the returned function goes, it remembers addBy.
 
 /// Returns a function that adds [addBy] to the
 /// function's argument.
 Function makeAdder(int addBy) {
+  // addBy is {{c1:current}} parameter
+  // i is {{c1:future}} parameter
   return (int i) => addBy + i;
 }
 
 void main() {
-  // Create a function that adds 2.
+  // {{c1:Create}} a function that adds 2.
   var add2 = makeAdder(2);
 
-  // Create a function that adds 4.
+  // {{c1:Create}} a function that adds 4.
   var add4 = makeAdder(4);
 
   assert(add2(3) == 5);
@@ -835,13 +842,13 @@ void main() {
 
 ##  Testing functions for equality
 ```dart
-Here’s an example of testing top-level functions, static methods, and instance methods for equality:
+Here’s an example of testing {{c1:top-level}} functions, {{c1:static}} methods, and {{c1:instance}} methods for equality:
 
-void foo() {} // A top-level function
+void foo() {} // A {{c1:top-level}} function
 
-class A {
-  static void bar() {} // A static method
-  void baz() {} // An instance method
+{{c1:class}} A {
+  static void bar() {} // A {{c1:static}} method
+  void baz() {} // An {{c1:instance}} method
 }
 
 void main() {
