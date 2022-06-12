@@ -297,7 +297,7 @@ assert((3 | 4) == 7); // 0011 | 0100 == 0111
 assert((3 & 4) == 0); // 0011 & 0100 == 0000
 For more examples, see the bitwise and shift operator section.
 
-Literal numbers are {{c1:compile-time}} constants. Many arithmetic expressions are also compile-time constants, as long as their operands are compile-time constants that evaluate to numbers.
+Literal numbers are {{c1:compile-time}} constants. Many arithmetic expressions are also {{c1:compile-time}} constants, as long as their operands are {{c1:compile-time}} constants that evaluate to numbers.
 
 const msPerSecond = 1000;
 const secondsUntilRetry = 5;
@@ -307,37 +307,36 @@ For more information, see Numbers in Dart.
 
 ##  Strings
 ```dart
-A Dart string (String object) holds a sequence of UTF-16 code units. You can use either single or double quotes to create a string:
+A Dart string (String object) holds a sequence of {{c1:UTF-16}} code units. You can use either {{c1:single}} or {{c1:double}} quotes to create a string:
 
 var s1 = 'Single quotes work well for string literals.';
 var s2 = "Double quotes work just as well.";
-var s3 = 'It\'s easy to escape the string delimiter.';
+var s3 = 'It{{c1:\}}'s easy to escape the string {{c1:delimiter}}.';
 var s4 = "It's even easier to use the other delimiter.";
-You can put the value of an expression inside a string by using ${expression}. If the expression is an identifier, you can skip the {}. To get the string corresponding to an object, Dart calls the object’s toString() method.
+You can put the value of an expression inside a string by using {{c1:${expression}}}. If the expression is an identifier, you can skip the {{c1:{}}}. To get the string corresponding to an object, Dart calls the object’s {{c1:toString()}} method.
 
 var s = 'string interpolation';
 
-assert('Dart has $s, which is very handy.' ==
-    'Dart has string interpolation, '
-        'which is very handy.');
+assert('Dart has {{c1:$s}}, which is very handy.' ==
+    'Dart has string interpolation{{c1:, ''}}which is very handy.');
 assert('That deserves all caps. '
-        '${s.toUpperCase()} is very handy!' ==
+        '{{c1:${s.toUpperCase()}}} is very handy!' ==
     'That deserves all caps. '
         'STRING INTERPOLATION is very handy!');
- Note: The == operator tests whether two objects are equivalent. Two strings are equivalent if they contain the same sequence of code units.
+ Note: The {{c1:==}} operator tests whether two objects are equivalent. Two strings are equivalent if they contain the same sequence of code units.
 
-You can concatenate strings using adjacent string literals or the + operator:
+You can concatenate strings using {{c1:adjacent}} string literals or the {{c1:+}} operator:
 
 var s1 = 'String '
     'concatenation'
-    " works even over line breaks.";
+    {{c1:"}} works even over {{c1:line breaks}}.";
 assert(s1 ==
     'String concatenation works even over '
-        'line breaks.');
+        '{{c1:line breaks}}.');
 
-var s2 = 'The + operator ' + 'works, as well.';
-assert(s2 == 'The + operator works, as well.');
-Another way to create a multi-line string: use a triple quote with either single or double quotation marks:
+var s2 = 'The {{c1:+}} operator ' {{c1:+}} 'works, as well.';
+assert(s2 == 'The {{c1:+}} operator works, as well.');
+Another way to create a {{c1:multi-line}} string: use a triple quote with either {{c1:single}} or {{c1:double}} quotation marks:
 
 var s1 = '''
 You can create
@@ -346,7 +345,7 @@ multi-line strings like this one.
 
 var s2 = """This is also a
 multi-line string.""";
-You can create a “raw” string by prefixing it with r:
+You can create a “{{c1:raw}}” string by prefixing it with r:
 
 var s = r'In a raw string, not even \n gets special treatment.';
 See Runes and grapheme clusters for details on how to express Unicode characters in a string.
@@ -364,8 +363,9 @@ var aBool = true;
 var aString = 'a string';
 const aConstList = [1, 2, 3];
 
-const validConstString = '$aConstNum $aConstBool $aConstString';
-// const invalidConstString = '$aNum $aBool $aString $aConstList';
+const validConstString = '{{c1:$aConstNum}} {{c1:$aConstBool}} {{c1:$aConstString}}';
+
+// const invalidConstString = '{{c1:$aNum}} {{c1:$aBool}} {{c1:$aString}} {{c1:$aConstList}}';
 For more information on using strings, see Strings and regular expressions.
 ```
 
@@ -377,71 +377,75 @@ Dart’s type safety means that you can’t use code like if (nonbooleanValue) o
 
 // Check for an empty string.
 var fullName = '';
-assert(fullName.isEmpty);
+{{c1:assert(fullName.isEmpty);}}
 
 // Check for zero.
 var hitPoints = 0;
-assert(hitPoints <= 0);
+{{c1:assert(hitPoints <= 0);}}
 
 // Check for null.
 var unicorn;
-assert(unicorn == null);
+{{c1:assert(unicorn == null);}}
 
 // Check for NaN.
 var iMeantToDoThis = 0 / 0;
-assert(iMeantToDoThis.isNaN);
+{{c1:assert(iMeantToDoThis.isNaN);}}
 ```
 
 ##  Lists
 ```dart
-Perhaps the most common collection in nearly every programming language is the array, or ordered group of objects. In Dart, arrays are List objects, so most people just call them lists.
+Perhaps the most common collection in nearly every programming language is the array, or {{c1:ordered}} group of objects. In Dart, arrays are List objects, so most people just call them lists.
 
-Dart list literals are denoted by a comma separated list of expressions or values, enclosed in square brackets ([]). Here’s a simple Dart list:
+Dart list literals are denoted by a {{c1:comma}} separated list of {{c1:expressions}} or values, enclosed in {{c1:square brackets}} ({{c1:[]}}). Here’s a simple Dart list:
 
 var list = [1, 2, 3];
- Note: Dart infers that list has type List<int>. If you try to add non-integer objects to this list, the analyzer or runtime raises an error. For more information, read about type inference.
+ Note: Dart {{c1:infers}} that list has type List<int>. If you try to add non-integer objects to this list, the analyzer or runtime {{c1:raises an error}}. For more information, read about type inference.
 
-You can add a comma after the last item in a Dart collection literal. This trailing comma doesn’t affect the collection, but it can help prevent copy-paste errors.
+You can add a {{c1:comma}} after the last item in a Dart collection literal. This trailing {{c1:comma}} doesn’t affect the collection, but it can help prevent {{c1:copy-paste}} errors.
 
 var list = [
   'Car',
   'Boat',
   'Plane',
 ];
-Lists use zero-based indexing, where 0 is the index of the first value and list.length - 1 is the index of the last value. You can get a list’s length using the .length property and access a list’s values using the subscript operator ([]):
+
+Lists use {{c1:zero-based}} indexing, where 0 is the index of the first value and {{c1:list.length - 1}} is the index of the last value. You can get a list’s length using the {{c1:.length}} property and access a list’s values using the {{c1:subscript}} operator ([]):
 
 var list = [1, 2, 3];
-assert(list.length == 3);
-assert(list[1] == 2);
+assert(list.{{c1:length}} == 3);
+assert(list[{{c1:1}}] == 2);
 
 list[1] = 1;
-assert(list[1] == 1);
-To create a list that’s a compile-time constant, add const before the list literal:
+assert(list[1] == {{c1:1}});
+To create a list that’s a {{c1:compile-time}} constant, add const before the list literal:
 
 var constantList = const [1, 2, 3];
 // constantList[1] = 1; // This line will cause an error.
-Dart 2.3 introduced the spread operator (...) and the null-aware spread operator (...?), which provide a concise way to insert multiple values into a collection.
+Dart 2.3 introduced the spread operator {{c1:(...)}} and the null-aware spread operator {{c1:(...?)}}, which provide a concise way to insert multiple values into a collection.
 
-For example, you can use the spread operator (...) to insert all the values of a list into another list:
+For example, you can use the spread operator {{c1:(...)}} to insert all the values of a list into another list:
 
 var list = [1, 2, 3];
-var list2 = [0, ...list];
+var list2 = [0, {{c1:...list}}];
 assert(list2.length == 4);
-If the expression to the right of the spread operator might be null, you can avoid exceptions by using a null-aware spread operator (...?):
+If the expression to the right of the spread operator might be null, you can avoid exceptions by using a {{c1:null-aware}} spread operator {{c1:(...?)}}:
 
-var list2 = [0, ...?list];
+var list2 = [0, {{c1:...?list}}];
 assert(list2.length == 1);
 For more details and examples of using the spread operator, see the spread operator proposal.
 
-Dart also offers collection if and collection for, which you can use to build collections using conditionals (if) and repetition (for).
+Dart also offers collection {{c1:if}} and collection {{c1:for}}, which you can use to build collections using conditionals ({{c1:if}}) and repetition ({{c1:for}}).
 
 Here’s an example of using collection if to create a list with three or four items in it:
 
-var nav = ['Home', 'Furniture', 'Plants', if (promoActive) 'Outlet'];
+// if promoActive is true add 'Outlet'
+var nav = ['Home', 'Furniture', 'Plants', {{c1:if (promoActive)}} 'Outlet'];
 Here’s an example of using collection for to manipulate the items of a list before adding them to another list:
 
+
+// adding '#' to listOfInts items and add them to listOfStrings
 var listOfInts = [1, 2, 3];
-var listOfStrings = ['#0', for (var i in listOfInts) '#$i'];
+var listOfStrings = ['#0', {{c1:for (var i in listOfInts)}} '#$i'];
 assert(listOfStrings[1] == '#1');
 For more details and examples of using collection if and for, see the control flow collections proposal.
 
