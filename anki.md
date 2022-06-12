@@ -546,71 +546,74 @@ var nobleGases = {{c1:Map<int, String>();}}
 Add a new key-value pair to an existing map using the {{c1:subscript}} assignment operator ({{c1:[]=}}):
 
 var gifts {{c1:= {}}'first': 'partridge'{{c1:}}};
-gifts['fourth'] = 'calling birds'; // Add a key-value pair
-Retrieve a value from a map using the subscript operator ([]):
+
+gifts{{c1:[}}'fourth'{{c1:]}} = 'calling birds'; // Add a key-value pair
+Retrieve a value from a map using the {{c1:subscript}} operator ({{c1:[]}}):
+
+var gifts = {{c1:{}}'first': 'partridge'{{c1:}}};
+assert(gifts{{c1:[}}'first'{{c1:]}} == 'partridge');
+If you look for a key that isn’t in a map, you get {{c1:null}} in return:
 
 var gifts = {'first': 'partridge'};
-assert(gifts['first'] == 'partridge');
-If you look for a key that isn’t in a map, you get null in return:
-
-var gifts = {'first': 'partridge'};
-assert(gifts['fifth'] == null);
-Use .length to get the number of key-value pairs in the map:
+assert(gifts['fifth'] == {{c1:null}});
+Use {{c1:.length}} to get the number of key-value pairs in the map:
 
 var gifts = {'first': 'partridge'};
 gifts['fourth'] = 'calling birds';
-assert(gifts.length == 2);
-To create a map that’s a compile-time constant, add const before the map literal:
+assert(gifts{{c1:.length}} == 2);
+To create a map that’s a {{c1:compile-time}} constant, add {{c1:const}} before the map literal:
 
-final constantMap = const {
+final constantMap = {{c1:const}} {{c1:{}}
   2: 'helium',
   10: 'neon',
   18: 'argon',
-};
+{{c1:}}};
 
-// constantMap[2] = 'Helium'; // This line will cause an error.
-Maps support spread operators (... and ...?) and collection if and for, just like lists do. For details and examples, see the spread operator proposal and the control flow collections proposal.
+// constantMap[2] = 'Helium'; // This line will cause {{c1:an error}}.
+Maps support spread operators ({{c1:...}} and {{c1:...?}}) and collection {{c1:if}} and {{c1:for}}, just like lists do. For details and examples, see the spread operator proposal and the control flow collections proposal.
 
 For more information about maps, see the generics section and the library tour’s coverage of the Maps API.
 ```
 
 ##  Runes and grapheme clusters
 ```dart
-In Dart, runes expose the Unicode code points of a string. You can use the characters package to view or manipulate user-perceived characters, also known as Unicode (extended) grapheme clusters.
+In Dart, runes expose the {{c1:Unicode}} code points of a string. You can use the characters package to view or manipulate user-perceived characters, also known as Unicode (extended) {{c1:grapheme}} clusters.
 
-Unicode defines a unique numeric value for each letter, digit, and symbol used in all of the world’s writing systems. Because a Dart string is a sequence of UTF-16 code units, expressing Unicode code points within a string requires special syntax. The usual way to express a Unicode code point is \uXXXX, where XXXX is a 4-digit hexadecimal value. For example, the heart character (♥) is \u2665. To specify more or less than 4 hex digits, place the value in curly brackets. For example, the laughing emoji (😆) is \u{1f606}.
+Unicode defines a {{c1:unique numeric}} value for each letter, digit, and symbol used in all of the world’s writing systems. Because a Dart string is a sequence of {{c1:UTF-16}} code units, expressing Unicode code points within a string requires special syntax. The usual way to express a Unicode code point is {{c1:\uXXXX}}, where XXXX is a 4-digit {{c1:hexadecimal}} value. For example, the heart character (♥) is \u2665. To specify more or less than 4 hex digits, place the value in {{c1:curly brackets}}. For example, the laughing emoji (😆) is \u{{c1:{}}1f606{{c1:}}}.
 
-If you need to read or write individual Unicode characters, use the characters getter defined on String by the characters package. The returned Characters object is the string as a sequence of grapheme clusters. Here’s an example of using the characters API:
+If you need to read or write individual Unicode characters, use the characters getter defined on String by the {{c1:characters}} package. The returned Characters object is the string as a sequence of {{c1:grapheme clusters}}. Here’s an example of using the characters API:
 
-import 'package:characters/characters.dart';
+// import characters api
+import '{{c1:package:characters/characters.dart}}';
 ...
 var hi = 'Hi 🇩🇰';
 print(hi);
-print('The end of the string: ${hi.substring(hi.length - 1)}');
-print('The last character: ${hi.characters.last}\n');
+print('The end of the string: ${{{c1:hi.substring(hi.length - 1)}}}');
+print('The last character: ${{{c1:hi.characters.last}}}\n');
 The output, depending on your environment, looks something like this:
 
  dart run bin/main.dart
 Hi 🇩🇰
 The end of the string: ???
 The last character: 🇩🇰
-For details on using the characters package to manipulate strings, see the example and API reference for the characters package.
+For details on using the {{c1:characters}} package to manipulate strings, see the example and API reference for the {{c1:characters}} package.
 ```
 
 ##  Symbols
 ```dart
-A Symbol object represents an operator or identifier declared in a Dart program. You might never need to use symbols, but they’re invaluable for APIs that refer to identifiers by name, because minification changes identifier names but not identifier symbols.
+A Symbol object represents an {{c1:operator}} or {{c1:identifier}} declared in a Dart program. You might never need to use symbols, but they’re invaluable for APIs that refer to identifiers by name, because {{c1:minification}} changes identifier names but not identifier symbols.
 
-To get the symbol for an identifier, use a symbol literal, which is just # followed by the identifier:
+To get the symbol for an identifier, use a {{c1:symbol literal}}, which is just {{c1:#}} followed by the identifier:
 
-#radix
-#bar
-Symbol literals are compile-time constants.
+{{c1:#}}radix
+{{c1:#}}bar
+
+Symbol literals are {{c1:compile-time}} constants.
 ```
 
 ##  Functions
 ```dart
-Dart is a true object-oriented language, so even functions are objects and have a type, Function. This means that functions can be assigned to variables or passed as arguments to other functions. You can also call an instance of a Dart class as if it were a function. For details, see Callable classes.
+Dart is a true object-oriented language, so even {{c1:functions}} are objects and have a type, {{c1:Function}}. This means that functions can be assigned to {{c1:variables}} or passed as {{c1:arguments}} to other functions. You can also call an {{c1:instance}} of a Dart class as if it were a {{c1:function}}. For details, see {{c1:Callable}} classes.
 
 Here’s an example of implementing a function:
 
