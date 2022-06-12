@@ -454,34 +454,36 @@ The List type has many handy methods for manipulating lists. For more informatio
 
 ##  Sets
 ```dart
-A set in Dart is an unordered collection of unique items. Dart support for sets is provided by set literals and the Set type.
+A set in Dart is an {{c1:unordered}} collection of {{c1:unique}} items. Dart support for sets is provided by set {{c1:literals}} and the Set {{c1:type}}.
 
 Here is a simple Dart set, created using a set literal:
 
 var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
- Note: Dart infers that halogens has the type Set<String>. If you try to add the wrong type of value to the set, the analyzer or runtime raises an error. For more information, read about type inference.
+Note: Dart infers that halogens has the type {{c1:Set<String>}}. If you try to add the wrong type of value to the set, the analyzer or runtime {{c1:raises an error}}. For more information, read about type inference.
 
-To create an empty set, use {} preceded by a type argument, or assign {} to a variable of type Set:
+To create an empty set, use {{c1:{}}} preceded by a {{c1:type}} argument, or assign {{c1:{}}} to a variable of type Set:
 
-var names = <String>{};
-// Set<String> names = {}; // This works, too.
-// var names = {}; // Creates a map, not a set.
- Set or map? The syntax for map literals is similar to that for set literals. Because map literals came first, {} defaults to the Map type. If you forget the type annotation on {} or the variable it’s assigned to, then Dart creates an object of type Map<dynamic, dynamic>.
+var names = <String>{{c1:{}}};
+// Set<String> names = {{c1:{}}}; // This works, too.
+// var names = {{c1:{}}}; // Creates a map, not a set.
+ Set or map? The syntax for map literals is similar to that for set literals. Because map literals came first, {{c1:{}}} defaults to the Map type. If you forget the {{c1:type}} annotation on {{c1:{}}} or the variable it’s assigned to, then Dart creates an object of type {{c1:Map<dynamic, dynamic>}}.
 
-Add items to an existing set using the add() or addAll() methods:
+Add items to an existing set using the {{c1:add()}} or {{c1:addAll()}} methods:
+Note: Dart infers that halogens has the type {{c1:Set<String>}}. If you try to add the wrong type of value to the set, the analyzer or runtime {{c1:raises an error}}. For more information, read about type inference.
+
+// var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
+var elements = <String>{};
+elements.{{c1:add}}('fluorine');
+elements.{{c1:addAll}}(halogens);
+Use {{c1:.length}} to get the number of items in the set:
 
 var elements = <String>{};
-elements.add('fluorine');
-elements.addAll(halogens);
-Use .length to get the number of items in the set:
+elements.{{c1:add}}('fluorine');
+elements.{{c1:addAll}}(halogens);
+assert(elements{{c1:.length}} == 5);
+To create a set that’s a {{c1:compile-time}} constant, add {{c1:const}} before the set literal:
 
-var elements = <String>{};
-elements.add('fluorine');
-elements.addAll(halogens);
-assert(elements.length == 5);
-To create a set that’s a compile-time constant, add const before the set literal:
-
-final constantSet = const {
+final constantSet = {{c1:const}} {
   'fluorine',
   'chlorine',
   'bromine',
@@ -489,47 +491,61 @@ final constantSet = const {
   'astatine',
 };
 // constantSet.add('helium'); // This line will cause an error.
-Sets support spread operators (... and ...?) and collection if and for, just like lists do. For more information, see the list spread operator and list collection operator discussions.
+Sets support spread operators ({{c1:...}} and {{c1:...?}}) and collection {{c1:if}} and {{c1:for}}, just like lists do. For more information, see the list spread operator and list collection operator discussions.
 
 For more information about sets, see Generics and Sets.
 ```
 
 ##  Maps
 ```dart
-In general, a map is an object that associates keys and values. Both keys and values can be any type of object. Each key occurs only once, but you can use the same value multiple times. Dart support for maps is provided by map literals and the Map type.
+In general, a map is an {{c1:object}} that associates keys and values. Both keys and values can be any {{c1:type}} of object. Each key occurs only {{c1:once}}, but you can use the same value multiple times. Dart support for maps is provided by map {{c1:literals}} and the Map {{c1:type}}.
 
 Here are a couple of simple Dart maps, created using map literals:
-
-var gifts = {
+// create gifts map 
+var gifts = {{c1:{}}
   // Key:    Value
   'first': 'partridge',
   'second': 'turtledoves',
   'fifth': 'golden rings'
-};
+{{c1:}}};
 
-var nobleGases = {
+var nobleGases = {{c1:{}}
   2: 'helium',
   10: 'neon',
   18: 'argon',
-};
- Note: Dart infers that gifts has the type Map<String, String> and nobleGases has the type Map<int, String>. If you try to add the wrong type of value to either map, the analyzer or runtime raises an error. For more information, read about type inference.
+{{c1:}}};
+}
+
+Note: Dart infers that gifts has the type Map<{{c1:String}}, {{c1:String}}> and nobleGases has the type Map<{{c1:int}}, {{c1:String}}>. If you try to add the wrong type of value to either map, the analyzer or runtime {{c1:raises an error}}. For more information, read about type inference.
 
 You can create the same objects using a Map constructor:
 
-var gifts = Map<String, String>();
-gifts['first'] = 'partridge';
-gifts['second'] = 'turtledoves';
-gifts['fifth'] = 'golden rings';
+// create map of string key and string value
+/*
+gifts
+'first': 'partridge',
+'second': 'turtledoves',
+'fifth': 'golden rings'
 
-var nobleGases = Map<int, String>();
-nobleGases[2] = 'helium';
-nobleGases[10] = 'neon';
-nobleGases[18] = 'argon';
- Note: If you come from a language like C# or Java, you might expect to see new Map() instead of just Map(). In Dart, the new keyword is optional. For details, see Using constructors.
+nobleGases
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+*/
+var gifts = {{c1:Map<String, String>();}}
+{{c1:gifts['first'] = 'partridge';}}
+{{c1:gifts['second'] = 'turtledoves';}}
+{{c1:gifts['fifth'] = 'golden rings';}}
 
-Add a new key-value pair to an existing map using the subscript assignment operator ([]=):
+var nobleGases = {{c1:Map<int, String>();}}
+{{c1:nobleGases[2] = 'helium';}}
+{{c1:nobleGases[10] = 'neon';}}
+{{c1:nobleGases[18] = 'argon';}}
+ Note: If you come from a language like C# or Java, you might expect to see {{c1:new}} Map() instead of just Map(). In Dart, the {{c1:new}} keyword is optional. For details, see Using constructors.
 
-var gifts = {'first': 'partridge'};
+Add a new key-value pair to an existing map using the {{c1:subscript}} assignment operator ({{c1:[]=}}):
+
+var gifts {{c1:= {}}'first': 'partridge'{{c1:}}};
 gifts['fourth'] = 'calling birds'; // Add a key-value pair
 Retrieve a value from a map using the subscript operator ([]):
 
