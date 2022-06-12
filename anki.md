@@ -617,32 +617,35 @@ Dart is a true object-oriented language, so even {{c1:functions}} are objects an
 
 Here’s an example of implementing a function:
 
-bool isNoble(int atomicNumber) {
+
+// function that returns boolean with integer parameter atomicNumber
+{{c1:bool}} isNoble({{c1:int atomicNumber}}) {
   return _nobleGases[atomicNumber] != null;
 }
-Although Effective Dart recommends type annotations for public APIs, the function still works if you omit the types:
+Although Effective Dart recommends {{c1:type}} annotations for public APIs, the function still works if you {{c1:omit}} the types:
 
-isNoble(atomicNumber) {
+// function isNonble and parameter: atomicNumber (omit type annotation)
+{{c1:isNoble(atomicNumber)}} {
   return _nobleGases[atomicNumber] != null;
 }
-For functions that contain just one expression, you can use a shorthand syntax:
+For functions that contain just one expression, you can use a {{c1:shorthand}} syntax:
 
-bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
-The => expr syntax is a shorthand for { return expr; }. The => notation is sometimes referred to as arrow syntax.
+bool isNoble(int atomicNumber) {{c1:=>}} _nobleGases[atomicNumber] != null;
+The {{c1:=>}} expr syntax is a shorthand for { return expr; }. The => notation is sometimes referred to as {{c1:arrow}} syntax.
 
- Note: Only an expression—not a statement—can appear between the arrow (=>) and the semicolon (;). For example, you can’t put an if statement there, but you can use a conditional expression.
+ Note: Only an expression—not {{c1:a statement}}—can appear between the arrow ({{c1:=>}}) and the {{c1:semicolon}} ({{c1:;}}). For example, you can’t put an {{c1:if statement}} there, but you can use a {{c1:conditional}} expression.
 ```
 
 ##  Parameters
 ```dart
-A function can have any number of required positional parameters. These can be followed either by named parameters or by optional positional parameters (but not both).
+A function can have any number of required {{c1:positional}} parameters. These can be followed either by {{c1:named}} parameters or by {{c1:optional}} positional parameters (but not {{c1:both}}).
 
- Note: Some APIs—notably Flutter widget constructors—use only named parameters, even for parameters that are mandatory. See the next section for details.
+Note: Some APIs—notably Flutter widget constructors—use only named parameters, even for parameters that are {{c1:mandatory}}. See the next section for details.
 
-You can use trailing commas when you pass arguments to a function or when you define function parameters.
+You can use {{c1:trailing}} commas when you pass arguments to a function or when you define function parameters.
 
 Named parameters
-Named parameters are optional unless they’re explicitly marked as required.
+Named parameters are {{c1:optional}} unless they’re explicitly marked as required.
 
 When defining a function, use {param1, param2, …} to specify named parameters:
 
@@ -651,22 +654,22 @@ void enableFlags({bool? bold, bool? hidden}) {...}
 When calling a function, you can specify named arguments using paramName: value. For example:
 
 enableFlags(bold: true, hidden: false);
-Although it often makes sense to place positional arguments first, named arguments can be placed anywhere in the argument list when it suits your API:
+Although it often makes sense to place {{c1:positional}} arguments first, {{c1:named}} arguments can be placed anywhere in the argument list when it suits your API:
 
 repeat(times: 2, () {
   ...
 });
- Tip: If a parameter is optional but can’t be null, provide a default value.
+ Tip: If a parameter is optional but can’t be null, provide a {{c1:default}} value.
 
-Although named parameters are a kind of optional parameter, you can annotate them with required to indicate that the parameter is mandatory—that users must provide a value for the parameter. For example:
+Although named parameters are a kind of {{c1:optional}} parameter, you can annotate them with required to indicate that the parameter is {{c1:mandatory}}—that users must provide a value for the parameter. For example:
 
-const Scrollbar({super.key, required Widget child});
+const Scrollbar({super.key, {{c1:required}} Widget child});
 If someone tries to create a Scrollbar without specifying the child argument, then the analyzer reports an issue.
 
 Optional positional parameters
-Wrapping a set of function parameters in [] marks them as optional positional parameters:
+Wrapping a set of function parameters in {{c1:[]}} marks them as optional positional parameters:
 
-String say(String from, String msg, [String? device]) {
+String say(String from, String msg, {{c1:[}}String? device{{c1:]}}) {
   var result = '$from says $msg';
   if (device != null) {
     result = '$result with a $device';
@@ -674,7 +677,6 @@ String say(String from, String msg, [String? device]) {
   return result;
 }
 Here’s an example of calling this function without the optional parameter:
-
 assert(say('Bob', 'Howdy') == 'Bob says Howdy');
 And here’s an example of calling this function with the third parameter:
 
@@ -682,16 +684,16 @@ assert(say('Bob', 'Howdy', 'smoke signal') ==
     'Bob says Howdy with a smoke signal');
 
 Default parameter values
-Your function can use = to define default values for optional parameters, both named and positional. The default values must be compile-time constants. If no default value is provided, the default value is null.
+Your function can use = to define default values for optional parameters, both {{c1:named}} and {{c1:positional}}. The default values must be {{c1:compile-time}} constants. If no default value is provided, the default value is {{c1:null}}.
 
 Here’s an example of setting default values for named parameters:
 
 /// Sets the [bold] and [hidden] flags ...
-void enableFlags({bool bold = false, bool hidden = false}) {...}
+void enableFlags({bool bold {{c1:=}} false, bool hidden {{c1:=}} false}) {...}
 
 // bold will be true; hidden will be false.
-enableFlags(bold: true);
- Deprecation note: Old code might use a colon (:) instead of = to set default values of named parameters. The reason is that originally, only : was supported for named parameters. That support might be deprecated, so we recommend that you use = to specify default values.
+enableFlags({{c1:bold: true}});
+ Deprecation note: Old code might use a {{c1:colon}} ({{c1::}}) instead of {{c1:=}} to set default values of named parameters. The reason is that originally, only {{c1::}} was supported for named parameters. That support might be deprecated, so we recommend that you use {{c1:=}} to specify default values.
 
 The next example shows how to set default values for positional parameters:
 
